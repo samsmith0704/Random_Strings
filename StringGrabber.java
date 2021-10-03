@@ -1,31 +1,72 @@
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class StringGrabber {
-	static HashSet getUserInput() {
-		HashSet<String> mySet = new HashSet<>();
+	static List getUserInput() {
+		List<String> myList = new ArrayList<>();
 		
-		
+		Scanner myObj = new Scanner(System.in);
+
 		while (true) {
 			
-			Scanner myObj = new Scanner(System.in);
 			System.out.println("Enter a String: ");
 		
 			String inputString = myObj.nextLine();
 			if (inputString.isEmpty()) {
-				myObj.close();
 				break;
 			}
-			mySet.add(inputString);
+			myList.add(inputString);
 			
 		}
 
 		
-		return mySet;
+		return myList;
+	}
+	
+	static boolean getReplacementInput() {
+		boolean replacementBoolean; 
+		Scanner myObj = new Scanner(System.in);
+		
+		while (true) {
+			
+			System.out.println("Replacement? (y/n) ");
+		
+			String inputString = myObj.nextLine().strip();
+
+			if (inputString.equals("y")) {
+				replacementBoolean=true; 
+				break;
+			}
+			else if (inputString.equals("n")) {
+				replacementBoolean=false;
+				break;
+			}
+		}
+		
+		return replacementBoolean; 
+	}
+	
+	static List<String> removeRandomString(List<String> originalList) {
+		Random rand = new Random();
+		int randomNum = rand.nextInt(originalList.size());
+		originalList.remove(randomNum);
+		return originalList;
 	}
 	
 	public static void main (String[] args) {
-		System.out.println(StringGrabber.getUserInput());
+		/*
+		 * call getreplacementinput
+		 * if that is yes, then dont call remove randomstring
+		 * if it is no, then call remove randomstring 
+		 * */
+		List<String> lst = StringGrabber.getUserInput();
+		System.out.println(lst);
+		StringGrabber.removeRandomString(lst);
+		System.out.println(lst);
+
 		
 	}
 }
