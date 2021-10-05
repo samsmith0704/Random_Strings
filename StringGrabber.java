@@ -43,19 +43,28 @@ public class StringGrabber {
 				replacementBoolean=false;
 				break;
 			}
+			
 		}
 		return replacementBoolean; 
 	}
 	
-	static List<String> removeRandomString(List<String> originalList, boolean shouldIReplace) {
-		if (!shouldIReplace) {
+	static String removeRandomString(List<String> originalList, boolean shouldIReplace) {
+		int randomNum=0;
+		
+		if ( originalList.size() > 0) {
 			Random rand = new Random();
-			int randomNum = rand.nextInt(originalList.size());
-			originalList.remove(randomNum);
+			randomNum = rand.nextInt(originalList.size());
+			String strToRemove = originalList.get(randomNum);
+			if (!shouldIReplace) {
+				originalList.remove(randomNum);
+			}
+			myObj.close();
+			return strToRemove;
+			
 		}
 		
 		myObj.close();
-		return originalList;
+		return "List is empty";
 	}
 	
 	public static void main (String[] args) {
@@ -65,10 +74,12 @@ public class StringGrabber {
 		 * if it is no, then call remove randomstring 
 		 * 
 		 * */
-//		boolean shouldIReplace = StringGrabber.getReplacementInput();
-//		List<String> lst = StringGrabber.getUserInput();
-//		StringGrabber.removeRandomString(lst, shouldIReplace);
-//		System.out.println(lst);
+		List<String> lst = StringGrabber.getUserInput();
+
+		boolean shouldIReplace = StringGrabber.getReplacementInput();
+		
+		System.out.println(StringGrabber.removeRandomString(lst, shouldIReplace));
+		System.out.println(lst);
 
 		
 	}
